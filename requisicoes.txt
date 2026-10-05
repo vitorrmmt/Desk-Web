@@ -1,0 +1,35 @@
+PEDIDO 1
+endereço: https://viacep.com.br/ws/15500003/json/
+método: GET
+status: 200
+tipo: application/json; charset=utf-8
+o que voltou: o endereço do CEP, em JSON (Rua Minas Gerais, Patrimônio Novo, 
+Votuporanga)
+
+PEDIDO 2
+endereço: https://www.unifev.edu.br/
+método: GET
+status: 200
+tipo: text/html; charset=UTF-8
+o que voltou: Conteúdo HTML da página
+
+PEDIDO 3
+endereço: https://www.unifev.edu.br/img/icones/WhatsApp.svg
+método: GET
+status: 200
+tipo: image/svg+xml
+o que voltou: Retorna a imagem
+
+PEDIDO 4
+endereço: https://viacep.com.br/ws/15500003/json/
+método: GET
+status: 200
+tipo: application/json; charset=utf-8
+o que voltou: Retornam normalmente os endereços e o cep.
+
+PEDIDO 5
+eu acho que: Não vai dar nenhum endereço
+
+
+PEDIDO 6
+eu acho que: Não vai dar nenhum endereço
