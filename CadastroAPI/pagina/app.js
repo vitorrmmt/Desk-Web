@@ -65,9 +65,60 @@ async function cadastrarLivro() {
     listarLivros();
 }
 
+async function excluirLivro() {
+    const codigo = document.getElementById("codigo-excluir").value; 
+    const mensagem = document.getElementById("mensagem-excluir");
+
+    const resposta = await fetch(API + "/livros" + codigo, {
+        method: "DELETE",
+    });
+
+    if (resposta.ok) {
+        mensagem.textContent = `Excluido o livro de código ${codigo}`; 
+        listarLivros();
+        return;
+    }
+
+    const erro = await resposta.json();
+    mensagem.textContent = erro.detail;
+}
+
+async function alterarLivro() {
+    const codigo = document.getElementById("codigo-alterar").value;
+    const campoTitulo = document.getElementById("novo-titulo");
+    const campoAutor = document.getElementById("novo-autor"); 
+    const campoAno = document.getElementById("novo-ano");
+    const mensagem = document.getElementById("mensagem-alterar");
+
+
+    const dados = {
+        titulo: campoTitulo.value,
+        autor: campoAutor.value,
+        ano: Number(campoAno.value),
+    };
+
+    const resposta = await fetch(API + "/livros/" + codigo, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify(dados),
+    });
+    const livro = await resposta.json();
+
+    if (!resposta.ok) {
+        mensagem.textContent = livro.detail;
+        return;
+    }
+    mensagem.textContent = `Alterado: ${livro.titulo} (código ${livro.id})`;
+    listarLivros();
+    } 
+
 const botaoListar = document.getElementById("botao-listar");
 botaoListar.addEventListener("click", listarLivros);
 const botaoBuscar = document.getElementById("botao-buscar");
 botaoBuscar.addEventListener("click", buscarLivro);
 const botaoCadastrar = document.getElementById("botao-cadastrar");
 botaoCadastrar.addEventListener("click", cadastrarLivro);
+const botaoExcluir = document.getElementById("botao-excluir");
+botaoExcluir.addEventListener("click", excluirLivro);
+const botaoAlterar = document.getElementById("botao-alterar");
+botaoAlterar.addEventListener("click", alterarLivro);

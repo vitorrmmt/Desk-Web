@@ -84,7 +84,5 @@ def excluir_livro(codigo: int):
     repositorio.excluir(codigo)
     repositorio.fechar()
 
-
-
 if __name__ == "__main__":
     uvicorn.run(app)
